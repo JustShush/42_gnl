@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:32:21 by dimarque          #+#    #+#             */
-/*   Updated: 2022/12/07 18:26:05 by dimarque         ###   ########.fr       */
+/*   Updated: 2022/12/21 22:59:41 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,44 @@ int	ft_strlen(char *str)
 	if (str[i] == '\n')
 		i++;
 	return (i);
+}
+
+char	*ctrl_L(char *buffer, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		while (buffer[i++])
+			buffer[i] = 0;
+	}
+	return (NULL);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	int		i;
+	int		k;
+
+	i = 0;
+	k = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	while (s1 && s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	free(s1);
+	while (s2[k])
+	{
+		str[i++] = s2[k];
+		if (s2[k++] == '\n')
+			break ;
+	}
+	str[i] = '\0';
+	return (str);
 }

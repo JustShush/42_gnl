@@ -6,25 +6,25 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:15:41 by dimarque          #+#    #+#             */
-/*   Updated: 2022/12/07 18:23:46 by dimarque         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:06:18 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd) {
-
-	static char buffer[BUFFER_SIZE + 1];
-	char		*ln;
+char	*get_next_line(int fd)
+{
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*line;
 	int			i;
 	int			j;
 
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (clear_error(buffer, fd));
-	ln = NULL;
+		return (ctrl_L(buffer, fd));
 	while (buffer[0] || read(fd, buffer, BUFFER_SIZE) > 0)
 	{
-		ln = ft_strjoin(ln, buffer);
+		line = ft_strjoin(line, buffer);
 		i = 0;
 		j = -1;
 		while (buffer[i])
@@ -35,22 +35,22 @@ char	*get_next_line(int fd) {
 				j = 0;
 			buffer[i++] = 0;
 		}
-		if (ln[ft_strlen(ln) - 1] == '\n')
+		if (line[ft_strlen(line) - 1] == '\n')
 			break ;
 	}
-	return (ln);
+	return (line);
 }
 
-int	main(void)
+/* int main(void)
 {
-	int		fd;
-	char	*ln;
+	int fd;
+	char *line;
 	fd = open("test.txt", O_RDONLY);
-	// printf("%s", get_next_line(fd));
-	while ((ln = get_next_ln(fd)))
+	//printf("%s", get_next_line(fd));
+	while ((ln = get_next_line(fd)))
 	{
-		printf("%s", ln);
-		free(ln);
+		printf("%s", line);
+		free(line);
 	}
 	return (0);
-}
+} */
