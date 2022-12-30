@@ -6,15 +6,15 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:32:21 by dimarque          #+#    #+#             */
-/*   Updated: 2022/12/21 22:59:41 by dimarque         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:17:40 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -26,16 +26,13 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ctrl_L(char *buffer, int fd)
+char	*ctrl_l(char *buffer)
 {
 	int	i;
 
 	i = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
-		while (buffer[i++])
-			buffer[i] = 0;
-	}
+	while (buffer[i])
+		buffer[i++] = 0;
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:15:41 by dimarque          #+#    #+#             */
-/*   Updated: 2022/12/21 23:06:18 by dimarque         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:17:48 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ char	*get_next_line(int fd)
 	int			j;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (ctrl_L(buffer, fd));
-	while (buffer[0] || read(fd, buffer, BUFFER_SIZE) > 0)
+	if (read(fd, NULL, 0) < 0)
+		return (ctrl_l(buffer));
+	while (buffer[0] || read(fd, buffer, BUFFER_SIZE))
 	{
 		line = ft_strjoin(line, buffer);
 		i = 0;
@@ -47,7 +47,7 @@ char	*get_next_line(int fd)
 	char *line;
 	fd = open("test.txt", O_RDONLY);
 	//printf("%s", get_next_line(fd));
-	while ((ln = get_next_line(fd)))
+	while ((line = get_next_line(fd)))
 	{
 		printf("%s", line);
 		free(line);
